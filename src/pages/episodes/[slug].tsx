@@ -3,8 +3,7 @@ import ptBR from "date-fns/locale/pt-BR";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext } from "react";
-import { PlayerContext } from "../../contexts/PlayerContext";
+import { usePlayer } from "../../contexts/PlayerContext";
 import { api } from "../../services/api";
 import { convertDurationToTimeString } from "../../util/convertDurationToTimeString";
 
@@ -16,7 +15,7 @@ type Episode = {
   thumbnail: string;
   description: string;
   members: string;
-  duration: string;
+  duration: number;
   durationAsString: string;
   url: string;
   publishedAt: string;
@@ -27,7 +26,7 @@ type EpisodeProps = {
 };
 
 export default function Episode({ episode }: EpisodeProps) {
-  const { play } = useContext(PlayerContext);
+  const { play } = usePlayer();
 
   return (
     <div className={styles.episode}>
